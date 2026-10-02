@@ -1,24 +1,43 @@
-# ⚽ AI Football Match Analytics & Computer Vision Pipeline
+# 📄 AI Research Assistant — RAG Pipeline
 
-Un pipeline complet et optimisé de vision par ordinateur développé en Python pour l'analyse de matchs de football à partir d'un flux vidéo de type "Broadcast Scouting Feed".
+<p align="center">
+  <img src="APERCU.png" alt="Aperçu de l'application AI Research Assistant" width="100%" />
+</p>
+
+> Une application web RAG (Retrieval-Augmented Generation) de niveau production conçue pour ingérer, analyser et interroger des articles scientifiques et documents PDF académiques avec une précision contextuelle élevée et une traçabilité stricte des sources.
 
 ---
 
 ## 🚀 Fonctionnalités Clés
 
-1. **Double-Passe (Two-Pass Processing) :** Analyse globale des trajectoires et des couleurs, suivie d'un rendu graphique haute fidélité.
-2. **Détection & Suivi Avancé :** Intégration de **YOLOv8** couplé à **ByteTrack** (via `supervision`) avec support intelligent des modèles génériques (COCO) vs fine-tunés (filtrage des spectateurs en tribunes, distinction des arbitres).
-3. **Compensation de Caméra (Pan, Tilt & Zoom) :** Utilisation du flot optique de Lucas-Kanade et correction d'échelle (Scale Compensation).
-4. **Calibration & Homographie :** Transformation de perspective (`ViewTransformer`) pour convertir les coordonnées pixels en mètres réels sur le terrain.
-5. **Analyse Cinématique & Possession :** Calculs lissés de la vitesse instantanée (km/h), distance parcourue, et algorithme de possession par équipe.
-6. **Rendu "Broadcast" :** Interface moderne avec des éléments semi-transparents, des pastilles de suivi arrondies et des statistiques en temps réel.
+* **Interface SaaS Épurée :** Design moderne sous Streamlit avec masquage des éléments natifs et customisation CSS poussée.
+* **Isolation Multi-Sessions :** Gestion de plusieurs discussions en parallèle. Chaque session possède son propre espace documentaire et sa propre collection ChromaDB dédiée pour éviter tout croisement de données.
+* **Pipeline LangChain Robuste :** 
+  * Découpage intelligent du texte (*RecursiveCharacterTextSplitter*).
+  * Reformulation autonome des requêtes ambigües selon l'historique de conversation (`CONDENSE_PROMPT`).
+  * Récupération sémantique ultra-précide (*Top-K retrieval*).
+* **Traçabilité & Citations :** Affichage de badges de pages interactifs et expandeurs de sources pour chaque réponse générée afin d'éliminer les hallucinations.
+* **Export de Session :** Module complet d'exportation de l'historique de discussion au format PDF (`fpdf2`).
+* **Starter Prompts :** Suggestions dynamiques pour démarrer l'exploration d'un nouveau document en un clic.
 
 ---
 
-## 📂 Structure du Projet
+## 🛠️ Stack Technique
 
-```text
-├── foot.py             # Script principal du pipeline d'analyse
-├── yolov8m.pt          # Modèle de détection YOLOv8
-├── input.mp4           # Vidéo d'entrée du match
-└── output_demo.mp4     # Vidéo de sortie générée avec les annotations
+* **Langage :** Python 3.10+
+* **Interface Graphique :** Streamlit
+* **Orchestration RAG :** LangChain (`langchain-core`, `langchain-community`, `langchain-chroma`, `langchain-google-genai`)
+* **Base de Données Vectorielle :** ChromaDB (persistance locale)
+* **Modèles IA (Google Gemini) :**
+  * LLM : `gemini-3.8-flash` (génération rapide en streaming)
+  * Embeddings : `gemini-embedding-2-preview` (vectorisation fine et multilingue)
+* **Export PDF :** `fpdf2`
+
+---
+
+## ⚙️ Installation & Laisement en Local
+
+1. **Cloner le repository :**
+   ```bash
+   git clone [https://github.com/ton-username/ai-research-assistant-rag.git](https://github.com/ton-username/ai-research-assistant-rag.git)
+   cd ai-research-assistant-rag
